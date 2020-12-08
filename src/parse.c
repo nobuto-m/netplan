@@ -2609,3 +2609,37 @@ netplan_clear_netdefs()
 	}
     return n;
 }
+
+/**
+ * Render keyfile data to YAML
+ */
+gboolean
+netplan_render_keyfile(GKeyFile* kf, void* data)
+{
+    printf("[STUB] netplan_render_keyfile %p %p\n", kf, data);
+    if (data)
+        printf("       path: %s\n", (char*)data);
+    g_autofree gchar *kf_str = g_key_file_to_data(kf, NULL, NULL);
+    printf("%s\n", kf_str);
+    fflush(stdout);
+    return TRUE;
+}
+
+gboolean
+netplan_delete_connection(const char* id, const char* uuid, const void* data)
+{
+    printf("[STUB] netplan_delete_connection %s, %s, %p\n", id, uuid, data);
+    fflush(stdout);
+    return TRUE;
+}
+
+gboolean
+netplan_generate()
+{
+    /* TODO: move logic into actual library instead of spawning another process */
+    printf("[STUB] netplan_generate ...\n");
+    fflush(stdout);
+    const gchar *argv[] = { "/sbin/netplan", "generate", NULL };
+    g_spawn_sync(NULL, (gchar**)argv, NULL, G_SPAWN_DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL);
+    return TRUE;
+}

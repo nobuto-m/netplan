@@ -479,3 +479,7 @@ gboolean netplan_parse_yaml(const char* filename, GError** error);
 GHashTable* netplan_finish_parse(GError** error);
 NetplanBackend netplan_get_global_backend();
 const char* tunnel_mode_to_string(NetplanTunnelMode mode);
+
+gboolean netplan_render_keyfile(GKeyFile* kf, void* data);
+gboolean netplan_delete_connection(const char* id, const char* uuid, const void* data);
+gboolean netplan_generate();
